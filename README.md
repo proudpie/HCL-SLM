@@ -1,3 +1,3 @@
-# HCL-LSM
-code for HCL-LSM (Hierarchical Contrastive Learning with Large Speech Model for Separating Similar Speakers)
+# HCL-SLM
+code for HCL-SLM (Hierarchical Contrastive Learning with Speech Language Model for Separating Similar Speakers)
 comming soon!
