@@ -1,0 +1,65 @@
+#### general settings
+name: TFLocoformer
+use_tb_logger: true
+num_spks: 2
+#### datasets
+datasets:
+  train:
+    dataroot_mix: /home/likai/data1/create_scp/tr_mix.scp
+    dataroot_targets: [/home/likai/data1/create_scp/tr_s1.scp,/home/likai/data1/create_scp/tr_s2.scp]
+
+  val:
+    dataroot_mix: /home/likai/data1/create_scp/cv_mix.scp
+    dataroot_targets: [/home/likai/data1/create_scp/cv_s1.scp,/home/likai/data1/create_scp/cv_s2.scp]
+  
+  dataloader_setting:
+    shuffle: true
+    num_workers: 0  # per GPU
+    batch_size: 2
+  
+  audio_setting:
+    sample_rate: 16000
+    chunk_size: 64000
+    least_size: 32000
+    
+#### network structures
+TFLocoformer:
+  num_spks: 2
+  emb_dim: 128
+  n_layers: 6
+  ffn_type: ["swiglu_conv1d", "swiglu_conv1d"]
+  ffn_hidden_dim: [384, 384]
+
+#### Optimizer settings
+optim:
+  name: AdamW   ### Adam, RMSprop, SGD
+  lr: !!float 5e-4
+  momentum: 0
+  weight_decay: 1e-2
+  clip_norm: 5
+
+#### scheduler settings
+scheduler:
+  min_lr: !!float 1e-8
+  patience: 2
+  factor: 0.5
+
+#### Resume training settings
+resume:
+  state: True
+  path: /train20/.../ckpt/tflf_16k/TFLocoformer/best.pt
+
+#### logger
+logger:
+  name: DPRNN
+  path: /train20/.../ckpt/tflf_qwen
+  screen: true
+  tofile: true
+  print_freq: 100
+
+#### training settings: learning rate scheme, loss
+train:
+  epoch: 100
+  early_stop: 10
+  path: /train20/.../ckpt/tflf_qwen
+  gpuid: [6,7]
