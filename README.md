@@ -7,6 +7,3 @@ Current learning objectives for blind source separation (BSS) mainly focus on re
 
 ## Experimental Results
 <img width="1376" height="346" alt="result_table1" src="https://github.com/user-attachments/assets/0de058f5-5cb6-4db3-9b0b-083368cef823" />
-
-## Running
-The code is stored in the internal network. Reorganizing the code takes time, and the full export has not been completed yet. If there are any OCR errors or other questions, please contact yihan7@mail.ustc.edu.cn. Thank you for your patience!
