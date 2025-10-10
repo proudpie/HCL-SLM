@@ -81,10 +81,8 @@ def train(rank, world_size, opt):
     logger = logging.getLogger(opt['logger']['name'])
     model_name = opt['name']
     # if torch.cuda.is_available():
-    #     # 启用cuDNN自动优化器
     #     torch.backends.cudnn.benchmark = True
     #     torch.backends.cudnn.enabled = True
-    #     # 可选：设置确定性计算（仅用于调试）
     #     # torch.backends.cudnn.deterministic = True
     #     logger.info("启动cuDNN自动优化器")
 
