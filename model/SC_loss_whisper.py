@@ -101,3 +101,4 @@ class SC_Loss(nn.Module):
 
         cross_loss_total /= ((len(permutations_list) - 1) * batch_size)
         return best_sim_loss, cross_loss_total
+        
