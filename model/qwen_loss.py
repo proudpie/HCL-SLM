@@ -33,7 +33,7 @@ class QwenLoss(nn.Module):
         inputs = self._audio_to_features(audio_signal)
         outputs = self.model(**inputs, output_hidden_states=True)
         hidden_states = outputs.hidden_states[0]
-        features = F.layer_norm(hidden_states, hidden_states.shape[1:])
+        features = F.layer_norm(hidden_states, (hidden_states.size(-1),))
         return F.normalize(features, p=2, dim=-1)
 
     def sim(self, generated_audio, reference_audio):
@@ -54,4 +54,5 @@ class QwenLoss(nn.Module):
             return sum([self.sim(ests[s], refs[t]) for s, t in enumerate(permute)]) / len(permute)
         loss_mat = torch.stack([compute_sim_score(p) for p in permutations(range(num_spks))]) # 得到 [(0,1), (1,0)]
         min_perutt, _ = torch.min(loss_mat, dim=0) # 沿排列维度取最大值
+
         return min_perutt.mean()
