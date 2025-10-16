@@ -51,7 +51,7 @@ class SC_Loss(nn.Module):
         encoder_outputs = self.model(input_features.squeeze(1))
         hidden_states = encoder_outputs.last_hidden_state
         hidden_states = hidden_states[:, :self.length, :]
-        return F.normalize(F.layer_norm(hidden_states, hidden_states.shape[1:]), p=2, dim=-1)
+        return F.normalize(F.layer_norm(hidden_states, (hidden_states.size(-1),)), p=2, dim=-1)
     
     def sim(self, generated_audio, reference_audio, mask, threshold=0.7):
         generated_audio = generated_audio - torch.mean(generated_audio)
@@ -101,4 +101,3 @@ class SC_Loss(nn.Module):
 
         cross_loss_total /= ((len(permutations_list) - 1) * batch_size)
         return best_sim_loss, cross_loss_total
-        
