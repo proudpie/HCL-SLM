@@ -16,7 +16,7 @@ class WavLMLoss(nn.Module):
         input_features = audio_signal # 不需要过处理器
         encoder_outputs = self.model(input_features)
         hidden_states = encoder_outputs.last_hidden_state # [batch, seq_len, dim]
-        features = F.layer_norm(hidden_states, hidden_states.shape[1:])
+        features = F.layer_norm(hidden_states, (hidden_states.size(-1),))
 
         return F.normalize(features, p=2, dim=-1)
     
@@ -36,4 +36,5 @@ class WavLMLoss(nn.Module):
             return sum([self.sim(ests[s], refs[t]) for s, t in enumerate(permute)]) / len(permute)
         loss_mat = torch.stack([compute_sim_score(p) for p in permutations(range(num_spks))])
         min_perutt, _ = torch.min(loss_mat, dim=0)
+
         return min_perutt.mean()
