@@ -61,7 +61,7 @@ class SC_Loss(nn.Module):
         hidden_states = self.extract(**inputs)
         hidden_states = hidden_states[:, :self.length, :]
         # print("hidden_states:", hidden_states.shape)
-        return F.normalize(F.layer_norm(hidden_states, hidden_states.shape[1:]), p=2, dim=-1)
+        return F.normalize(F.layer_norm(hidden_states, (hidden_states.size(-1),)), p=2, dim=-1)
     
     def sim(self, generated_audio, reference_audio, mask, threshold=0.7):
         generated_audio = generated_audio - torch.mean(generated_audio)
