@@ -152,5 +152,3 @@ class SC_Loss(nn.Module):
             audio_outputs = self.model(input_features, attention_mask=audio_attention_mask)
             selected_audio_feature = audio_outputs.last_hidden_state
         return selected_audio_feature
-
-
