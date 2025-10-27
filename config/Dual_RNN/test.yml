@@ -1,0 +1,42 @@
+#### general settings
+name: DPRNN
+use_tb_logger: true
+num_spks: [2]
+
+#### datasets
+mix_scp: /train20/.../tt_mix_xx.scp # WSJ0-samemix
+# mix_scp: /train20/.../tt_mix.scp # WSJ0-2mix
+
+audio:
+  sample_rate: 16000
+gpuid: 1
+model_path: /train20/.../ckpt/DPRNN_qwen/DPRNN/best.pt
+save_path:  /train20/.../ckpt/DPRNN_qwen/result_xx
+#### network structures
+DPRNN:
+  in_channels: 256
+  out_channels: 64 
+  hidden_channels: 128
+  kernel_size: 2
+  rnn_type: LSTM
+  norm: ln
+  dropout: 0
+  bidirectional: true
+  num_layers: 6
+  K: 250
+  num_spks: 2
+
+#### logger (not used)
+logger:
+  name: DPCL
+  path: /train20/.../ckpt/DPRNN_qwen/DPRNN/result
+  screen: true
+  tofile: false
+  print_freq: 1000
+
+#### resume (not used)
+resume:
+  state: false
+  path: /train20/.../ckpt/DPRNN_qwen/DPRNN/result
+
+# python3 test_DPRNN.py --yaml config/DPRNN/test.yml

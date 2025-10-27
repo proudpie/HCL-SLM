@@ -1,0 +1,36 @@
+#### general settings
+name: TFLocoformer
+use_tb_logger: true
+num_spks: [2]
+
+#### datasets
+mix_scp: /train20/.../tt_mix_xx.scp # WSJ0-samemix
+# mix_scp: /train20/.../tt_mix.scp # WSJ0-2mix
+
+audio:
+  sample_rate: 16000
+gpuid: 3
+model_path: /train20/.../ckpt/tflf_qwen/TFLocoformer/best.pt
+save_path:  /train20/.../ckpt/tflf_qwen/result_xx
+#### network structures
+TFLocoformer:
+  num_spks: 2
+  emb_dim: 128
+  n_layers: 6
+  ffn_type: ["swiglu_conv1d", "swiglu_conv1d"]
+  ffn_hidden_dim: [384, 384]
+
+#### logger (not used)
+logger:
+  name: DPCL
+  path: /train20/.../ckpt/tflf_qwen/TFLocoformer/result
+  screen: true
+  tofile: false
+  print_freq: 1000
+
+#### resume (not used)
+resume:
+  state: false
+  path: /train20/.../ckpt/tflf_qwen/TFLocoformer/result
+
+# python3 test_tflf.py --yaml config/TFLocoformer/test.yml

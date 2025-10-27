@@ -1,0 +1,11 @@
+librosa==0.11.0
+numba==0.58.1
+numpy==1.24.4
+packaging==25.0
+rotary-embedding-torch==0.8.9
+soundfile==0.13.1
+tokenizers==0.20.3
+torch==2.4.1
+torchaudio==2.4.1
+tqdm==4.67.1
+transformers==4.46.3
