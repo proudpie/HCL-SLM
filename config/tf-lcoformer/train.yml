@@ -35,7 +35,7 @@ optim:
   name: AdamW   ### Adam, RMSprop, SGD
   lr: !!float 5e-4
   momentum: 0
-  weight_decay: 1e-2
+  weight_decay: !!float 1e-2
   clip_norm: 5
 
 #### scheduler settings
